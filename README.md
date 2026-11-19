@@ -38,13 +38,13 @@
 
 ### 1. Веб-сайт (GitHub Pages):
 Сайт автоматически опубликован и работает онлайн:
-- **Живой сайт:** `https://orinmaksim348-cloud.github.io/drc-maksik/`
+- **Живой сайт:** `https://orinmaksim348-cloud.github.io/maksik/`
 
 ### 2. Telegram Бот 24/7 (@maksikauth_bot):
 Для круглосуточной работы бота без включенного компьютера:
 - **Бесплатный хостинг Render.com (Рекомендуется):**
   1. Зарегистрируйтесь на [render.com](https://render.com) через ваш GitHub.
-  2. Нажмите **New +** -> **Web Service** и выберите репозиторий `drc-maksik`.
+  2. Нажмите **New +** -> **Web Service** и выберите репозиторий `maksik`.
   3. Render автоматически определит настройки (`package.json` и `render.yaml`).
   4. Нажмите **Deploy** — бот запустится в облаке и будет работать 24/7!
 - **Локальный запуск на компьютере:**

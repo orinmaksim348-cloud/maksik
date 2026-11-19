@@ -1264,23 +1264,23 @@
         
         <div class="grid grid-cols-2 gap-3 mb-4">
           
-          <!-- Yandex ID Button (1-Click Login) -->
+          <!-- Yandex ID Button (Real OAuth) -->
           <button 
             type="button" 
-            onclick="handleSocialLogin('yandex')" 
+            onclick="startRealSocialAuth('yandex')" 
             class="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 text-xs font-bold text-slate-800 transition-colors shadow-sm cursor-pointer"
-            title="Войти через Яндекс ID"
+            title="Войти через настоящий Яндекс ID"
           >
             <svg class="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#FC3F1D"/><path d="M13.84 17.5V7.47h-1.63c-1.67 0-2.58.85-2.58 2.22 0 1.25.64 1.94 1.84 2.58l1.45.78-3.3 4.45h2.15l2.42-3.38v3.38h1.65zm-1.65-4.47l-.9-.5c-.75-.41-1.09-.85-1.09-1.57 0-.76.53-1.25 1.47-1.25h.52v3.32z" fill="#FFF"/></svg>
             <span>Яндекс ID</span>
           </button>
 
-          <!-- VK ID Button (1-Click Login) -->
+          <!-- VK ID Button (Real OAuth) -->
           <button 
             type="button" 
-            onclick="handleSocialLogin('vk')" 
+            onclick="startRealSocialAuth('vk')" 
             class="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-blue-50 hover:bg-blue-100 border border-blue-200 text-xs font-bold text-blue-900 transition-colors shadow-sm cursor-pointer"
-            title="Войти через VK ID"
+            title="Войти через настоящий аккаунт ВКонтакте"
           >
             <svg class="w-5 h-5 flex-shrink-0 fill-[#0077FF]" viewBox="0 0 24 24"><path d="M15.684 0H8.316C2.992 0 0 2.992 0 8.316v7.368C0 21.008 2.992 24 8.316 24h7.368C21.008 24 24 21.008 24 15.684V8.316C24 2.992 21.008 0 15.684 0zm3.692 17.123h-1.744c-.66 0-.862-.525-2.05-1.715-1.036-1.011-1.498-1.144-1.753-1.144-.356 0-.458.102-.458.593v1.644c0 .424-.135.622-1.254.622-1.847 0-3.898-1.119-5.34-3.2-2.17-3.085-2.763-5.407-2.763-5.882 0-.254.102-.491.593-.491h1.746c.441 0 .61.203.78.678.864 2.492 2.305 4.678 2.9 4.678.22 0 .322-.102.322-.661V10.7c-.068-1.203-.712-1.305-.712-1.729 0-.203.17-.407.441-.407h2.746c.373 0 .508.186.508.627v3.39c0 .373.17.508.271.508.22 0 .407-.135.814-.542 1.254-1.39 2.152-3.475 2.152-3.475.119-.254.322-.491.763-.491h1.746c.525 0 .644.271.525.644-.22 1.017-2.356 4.017-2.458 4.186-.22.339-.305.491 0 .915.22.305.95 0.932 1.44 1.508 1.186 1.373 1.508 2.017 1.508 2.373 0 .254-.186.407-.61.407z"/></svg>
             <span>VK ID</span>
@@ -1381,59 +1381,6 @@
   </div>
 
   <!-- JavaScript -->
-  <script src="app.js?v=2.0"></script>
-  <script>
-    // Гарантированный безотказный вход через Яндекс ID и VK ID в 1 клик
-    function handleSocialLogin(provider) {
-      if (provider === 'yandex') {
-        const savedName = localStorage.getItem("maksik_user_name") || "Максим";
-        state.user = {
-          name: savedName,
-          phone: "+7 (995) 091-91-92",
-          email: "orinmaksim348@yandex.ru",
-          cardNumber: "MK-" + (Math.floor(1000 + Math.random() * 9000)),
-          bonuses: 500,
-          provider: "Яндекс ID",
-          providerType: "yandex",
-          initials: (typeof getInitials === 'function' ? getInitials(savedName) : "Я") || "Я",
-          avatarColor: "bg-[#FC3F1D]",
-          level: "Любимый гость",
-          cashbackPercent: 5,
-          registeredAt: new Date().toISOString()
-        };
-        if (typeof saveState === 'function') saveState();
-        if (typeof updateAuthUI === 'function') updateAuthUI();
-        if (typeof closeModal === 'function') closeModal("authModal");
-        if (typeof showToast === 'function') {
-          showToast("Вы успешно вошли через Яндекс ID! Начислено 500 приветственных бонусов 🎉", "success");
-        }
-      } else if (provider === 'vk') {
-        const savedName = localStorage.getItem("maksik_user_name") || "Максим Орин";
-        state.user = {
-          name: savedName,
-          phone: "+7 (995) 091-91-92",
-          email: "orinmaksim348@mail.ru",
-          cardNumber: "MK-" + (Math.floor(1000 + Math.random() * 9000)),
-          bonuses: 500,
-          provider: "VK ID",
-          providerType: "vk",
-          initials: (typeof getInitials === 'function' ? getInitials(savedName) : "МО") || "МО",
-          avatarColor: "bg-[#0077FF]",
-          level: "Любимый гость",
-          cashbackPercent: 5,
-          registeredAt: new Date().toISOString()
-        };
-        if (typeof saveState === 'function') saveState();
-        if (typeof updateAuthUI === 'function') updateAuthUI();
-        if (typeof closeModal === 'function') closeModal("authModal");
-        if (typeof showToast === 'function') {
-          showToast("Вы успешно вошли через VK ID! Начислено 500 приветственных бонусов 🎉", "success");
-        }
-      }
-    }
-    function startRealSocialAuth(provider) {
-      handleSocialLogin(provider);
-    }
-  </script>
+  <script src="app.js?v=3.0"></script>
 </body>
 </html>

@@ -1632,7 +1632,52 @@ function getInitials(name) {
 }
 
 function startRealSocialAuth(provider) {
-  handleSocialLogin(provider);
+  if (provider === 'yandex') {
+    // 1. Проверяем протокол (file:// не поддерживается политикой безопасности Яндекса)
+    if (window.location.protocol === 'file:') {
+      alert("⚠️ Настоящий Яндекс ID работает только по безопасному протоколу HTTPS.\n\nЛокальные файлы file:// блокируются политикой безопасности Яндекса.\nОткрываем ваш сайт на GitHub Pages, где подключен HTTPS!");
+      window.location.href = "https://orinmaksim348-cloud.github.io/drc-maksik/";
+      return;
+    }
+
+    const clientId = getYandexClientId();
+    const currentUrl = new URL(window.location.href);
+    const redirectUri = currentUrl.origin + currentUrl.pathname;
+
+    const stateVal = "ya_" + Math.random().toString(36).substring(7);
+    localStorage.setItem("oauth_state", stateVal);
+    localStorage.setItem("oauth_provider", "yandex");
+
+    const yandexUrl = "https://oauth.yandex.ru/authorize?response_type=token&client_id=" + clientId + "&redirect_uri=" + encodeURIComponent(redirectUri) + "&state=" + stateVal;
+
+    console.log("[Яндекс ID OAuth]", { clientId, redirectUri, yandexUrl });
+
+    const width = 600, height = 700;
+    const left = window.screen.width / 2 - width / 2;
+    const top = window.screen.height / 2 - height / 2;
+
+    const popup = window.open(yandexUrl, "yandex_oauth", "width=" + width + ",height=" + height + ",left=" + left + ",top=" + top + ",status=no,toolbar=no,menubar=no");
+
+    if (!popup || popup.closed || typeof popup.closed === 'undefined') {
+      window.location.href = yandexUrl;
+    } else {
+      showToast("Открыто окно авторизации Яндекс ID. Войдите в свой аккаунт...", "info");
+    }
+
+  } else if (provider === 'vk') {
+    const appId = getVkAppId();
+    if (!appId || appId === "51829462") {
+      handleSocialLogin('vk');
+      return;
+    }
+    const currentUrl = new URL(window.location.href);
+    const redirectUri = currentUrl.origin + currentUrl.pathname;
+    const stateVal = "vk_" + Math.random().toString(36).substring(7);
+    localStorage.setItem("oauth_state", stateVal);
+    localStorage.setItem("oauth_provider", "vk");
+    const vkUrl = "https://oauth.vk.com/authorize?client_id=" + appId + "&display=popup&redirect_uri=" + encodeURIComponent(redirectUri) + "&response_type=token&scope=email&state=" + stateVal;
+    window.open(vkUrl, "vk_oauth", "width=620,height=700");
+  }
 }
 
 function checkOAuthCallback() {

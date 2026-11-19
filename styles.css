@@ -1,0 +1,454 @@
+/* ========================================================
+   Детский развлекательный центр «МАКСИК»
+   г. Шахты, ТРЦ «Максимум», 3 этаж
+   Современный дизайн студийного уровня (Agency-grade UI)
+   Светлая и тёмная темы оформления
+   ======================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+  --primary: #F05423;
+  --primary-hover: #D94416;
+  --primary-subtle: #FFF3EE;
+  --primary-border: #FFD9CC;
+  
+  --dark: #0F172A;
+  --dark-light: #1E293B;
+  --slate-text: #334155;
+  --slate-muted: #64748B;
+  --slate-border: #E2E8F0;
+  --bg-main: #F8FAFC;
+  --bg-white: #FFFFFF;
+  
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --shadow-subtle: 0 4px 20px -2px rgba(15, 23, 42, 0.06), 0 2px 6px -1px rgba(15, 23, 42, 0.04);
+  --shadow-card: 0 10px 30px -4px rgba(15, 23, 42, 0.08);
+  --shadow-hover: 0 20px 35px -5px rgba(240, 84, 35, 0.15), 0 10px 15px -5px rgba(15, 23, 42, 0.04);
+  
+  --font-family: 'Manrope', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* ========================================================
+   DARK THEME PALETTE
+   ======================================================== */
+html.dark {
+  --primary: #F05423;
+  --primary-hover: #FF6636;
+  --primary-subtle: rgba(240, 84, 35, 0.15);
+  --primary-border: rgba(240, 84, 35, 0.35);
+  
+  --dark: #F8FAFC;
+  --dark-light: #E2E8F0;
+  --slate-text: #CBD5E1;
+  --slate-muted: #94A3B8;
+  --slate-border: #263348;
+  --bg-main: #0B0F19;
+  --bg-white: #151D2C;
+  
+  --shadow-subtle: 0 4px 20px -2px rgba(0, 0, 0, 0.45);
+  --shadow-card: 0 10px 30px -4px rgba(0, 0, 0, 0.65);
+  --shadow-hover: 0 20px 35px -5px rgba(240, 84, 35, 0.3);
+  
+  color-scheme: dark;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  font-family: var(--font-family);
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--slate-text);
+  overflow-x: hidden;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+html.dark ::-webkit-scrollbar-track {
+  background: #0B0F19;
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+html.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* Header & Glass */
+.header-glass {
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--slate-border);
+}
+
+html.dark .header-glass {
+  background: rgba(15, 23, 42, 0.96);
+  border-bottom: 1px solid var(--slate-border);
+}
+
+/* Clean Cards */
+.site-card {
+  background: var(--bg-white);
+  border: 1px solid var(--slate-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-subtle);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.site-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--primary-border);
+}
+
+/* Primary Button */
+.btn-primary {
+  background-color: var(--primary);
+  color: #FFFFFF !important;
+  font-weight: 700;
+  border-radius: 14px;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px rgba(240, 84, 35, 0.3);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(240, 84, 35, 0.4);
+}
+
+/* Secondary Button */
+.btn-secondary {
+  background-color: var(--bg-white);
+  color: var(--dark);
+  border: 1px solid var(--slate-border);
+  font-weight: 700;
+  border-radius: 14px;
+  transition: all 0.25s ease;
+}
+
+.btn-secondary:hover {
+  background-color: var(--bg-main);
+  border-color: #CBD5E1;
+  color: var(--primary);
+}
+
+html.dark .btn-secondary {
+  background-color: #1E293B;
+  color: #F8FAFC;
+  border-color: #334155;
+}
+
+html.dark .btn-secondary:hover {
+  background-color: #27354A;
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* Clean Badges */
+.badge-clean {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+/* Modal styling */
+.modal-overlay {
+  background: rgba(11, 15, 25, 0.78);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Toast */
+.toast-msg {
+  animation: slideUp 0.3s ease forwards;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Phone Block Formatting: Anti-Break */
+.phone-pill {
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+}
+
+.phone-pill span, .phone-pill strong {
+  white-space: nowrap !important;
+}
+
+/* Clean Hamburger 3-Stripes Button */
+.btn-hamburger {
+  background: transparent;
+  border: none;
+  padding: 8px;
+  color: var(--dark);
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-hamburger:hover {
+  color: var(--primary);
+  transform: scale(1.05);
+}
+
+html.dark .btn-hamburger {
+  color: #F8FAFC;
+}
+
+/* Interactive Tabs */
+.filter-tab.active {
+  background-color: var(--primary);
+  color: #FFFFFF !important;
+  border-color: var(--primary);
+}
+
+/* Step Wizard Navigation */
+.step-indicator {
+  transition: all 0.3s ease;
+}
+
+.step-indicator.active {
+  background-color: var(--primary);
+  color: #FFFFFF !important;
+  border-color: var(--primary);
+}
+
+.step-indicator.completed {
+  background-color: #ECFDF5;
+  color: #059669;
+  border-color: #A7F3D0;
+}
+
+html.dark .step-indicator.completed {
+  background-color: rgba(5, 150, 105, 0.2);
+  color: #34D399;
+  border-color: rgba(5, 150, 105, 0.4);
+}
+
+/* Drawer Slide Transition */
+#sideDrawer {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Theme Icon Visibility */
+html:not(.dark) .theme-icon-sun {
+  display: none !important;
+}
+html:not(.dark) .theme-icon-moon {
+  display: block !important;
+}
+html.dark .theme-icon-sun {
+  display: block !important;
+}
+html.dark .theme-icon-moon {
+  display: none !important;
+}
+
+/* Drawer Theme Switch Toggle */
+html.dark .theme-switch-track {
+  background-color: var(--primary) !important;
+}
+html.dark .theme-switch-thumb {
+  transform: translateX(20px) !important;
+}
+
+/* ========================================================
+   DARK THEME COMPREHENSIVE OVERRIDES
+   ======================================================== */
+html.dark .text-slate-900,
+html.dark .text-slate-800 {
+  color: #F8FAFC !important;
+}
+
+html.dark .text-slate-700 {
+  color: #E2E8F0 !important;
+}
+
+html.dark .text-slate-600 {
+  color: #CBD5E1 !important;
+}
+
+html.dark .text-slate-500 {
+  color: #94A3B8 !important;
+}
+
+html.dark .text-slate-400 {
+  color: #64748B !important;
+}
+
+html.dark .bg-white {
+  background-color: var(--bg-white) !important;
+}
+
+html.dark .bg-slate-50 {
+  background-color: #1A2436 !important;
+}
+
+html.dark .bg-slate-100 {
+  background-color: #1E293B !important;
+}
+
+html.dark .bg-\[\#F8FAFC\] {
+  background-color: var(--bg-main) !important;
+}
+
+html.dark .border-slate-100,
+html.dark .border-slate-200 {
+  border-color: var(--slate-border) !important;
+}
+
+html.dark .border-slate-300 {
+  border-color: #334155 !important;
+}
+
+html.dark input,
+html.dark select,
+html.dark textarea {
+  background-color: #1A2436 !important;
+  color: #F8FAFC !important;
+  border-color: #334155 !important;
+}
+
+html.dark input::placeholder,
+html.dark textarea::placeholder {
+  color: #64748B !important;
+}
+
+html.dark input:focus,
+html.dark select:focus,
+html.dark textarea:focus {
+  border-color: var(--primary) !important;
+}
+
+html.dark #sideDrawer {
+  background-color: #121A28 !important;
+  color: #F8FAFC !important;
+}
+
+html.dark #sideDrawer nav a {
+  color: #E2E8F0 !important;
+}
+
+html.dark #sideDrawer nav a:hover {
+  background-color: #1A2436 !important;
+  color: var(--primary) !important;
+}
+
+html.dark .bg-orange-50 {
+  background-color: rgba(240, 84, 35, 0.12) !important;
+}
+
+html.dark .border-orange-200 {
+  border-color: rgba(240, 84, 35, 0.3) !important;
+}
+
+html.dark .text-orange-900 {
+  color: #FFD4C4 !important;
+}
+
+html.dark .bg-blue-50 {
+  background-color: rgba(37, 99, 235, 0.15) !important;
+}
+
+html.dark .border-blue-200 {
+  border-color: rgba(37, 99, 235, 0.3) !important;
+}
+
+html.dark .text-blue-900 {
+  color: #93C5FD !important;
+}
+
+html.dark #authModal .bg-white,
+html.dark #cabinetModal .bg-white,
+html.dark #postDetailsModal .bg-white,
+html.dark #ticketModal .bg-white {
+  background-color: #151D2C !important;
+  border: 1px solid var(--slate-border);
+}
+
+html.dark #contacts {
+  background-color: #0E1523 !important;
+  border-top-color: var(--slate-border) !important;
+}
+
+/* Interactive Time Slot Buttons */
+.slot-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 8px;
+  border-radius: 12px;
+  border: 1.5px solid var(--slate-border);
+  background: var(--bg-white);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.slot-btn:hover:not(:disabled) {
+  border-color: var(--primary);
+  background: var(--primary-subtle);
+  transform: translateY(-1px);
+}
+
+.slot-btn.selected {
+  border-color: var(--primary) !important;
+  background: var(--primary-subtle) !important;
+  box-shadow: 0 0 0 2px rgba(240, 84, 35, 0.25);
+}
+
+.slot-btn.selected .slot-time {
+  color: var(--primary) !important;
+  font-weight: 800;
+}
+
+.slot-btn:disabled,
+.slot-btn.busy {
+  background: #F1F5F9 !important;
+  border-color: #E2E8F0 !important;
+  cursor: not-allowed !important;
+  opacity: 0.65;
+}
+
+html.dark .slot-btn:disabled,
+html.dark .slot-btn.busy {
+  background: #131A26 !important;
+  border-color: #1E293B !important;
+  opacity: 0.5;
+}

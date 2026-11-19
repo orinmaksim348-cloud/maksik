@@ -1,0 +1,20 @@
+{
+  "name": "drc-maksik",
+  "version": "1.0.0",
+  "description": "Сайт и Telegram бот для ДРЦ «Максик» (г. Шахты, ТРЦ Максимум)",
+  "main": "telegram_bot/bot.js",
+  "scripts": {
+    "start": "node telegram_bot/bot.js",
+    "bot": "node telegram_bot/bot.js"
+  },
+  "keywords": [
+    "telegram-bot",
+    "landing-page",
+    "drc-maksik"
+  ],
+  "author": "orinmaksim348-cloud",
+  "license": "ISC",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

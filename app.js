@@ -1632,60 +1632,7 @@ function getInitials(name) {
 }
 
 function startRealSocialAuth(provider) {
-  // If running on local file:// or GitHub Pages without custom domain, perform instant guaranteed login
-  const isLocalOrPages = window.location.protocol === 'file:' || 
-                         window.location.hostname.includes('github.io') || 
-                         window.location.hostname === 'localhost';
-
-  if (isLocalOrPages) {
-    handleSocialLogin(provider);
-    return;
-  }
-
-  const currentOrigin = window.location.origin;
-  const currentPath = window.location.pathname;
-  const redirectUri = currentOrigin + currentPath;
-
-  if (provider === 'yandex') {
-    const clientId = getYandexClientId();
-    if (!clientId) {
-      handleSocialLogin('yandex');
-      return;
-    }
-
-    const stateVal = "ya_" + Math.random().toString(36).substring(7);
-    localStorage.setItem("oauth_state", stateVal);
-    localStorage.setItem("oauth_provider", "yandex");
-
-    const yandexUrl = "https://oauth.yandex.ru/authorize?response_type=token&client_id=" + clientId + "&redirect_uri=" + encodeURIComponent(redirectUri) + "&state=" + stateVal;
-
-    const width = 600, height = 700;
-    const left = window.screen.width / 2 - width / 2;
-    const top = window.screen.height / 2 - height / 2;
-
-    try {
-      const popup = window.open(yandexUrl, "yandex_oauth", "width=" + width + ",height=" + height + ",left=" + left + ",top=" + top + ",status=no,toolbar=no,menubar=no");
-
-      if (!popup || popup.closed || typeof popup.closed === 'undefined') {
-        handleSocialLogin('yandex');
-      } else {
-        showToast("Подключение через Яндекс ID...", "info");
-        const checkTimer = setInterval(() => {
-          if (popup.closed) {
-            clearInterval(checkTimer);
-            if (!state.user || state.user.providerType !== 'yandex') {
-              handleSocialLogin('yandex');
-            }
-          }
-        }, 1200);
-      }
-    } catch (e) {
-      handleSocialLogin('yandex');
-    }
-
-  } else if (provider === 'vk') {
-    handleSocialLogin('vk');
-  }
+  handleSocialLogin(provider);
 }
 
 function checkOAuthCallback() {
